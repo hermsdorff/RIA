@@ -6,25 +6,25 @@ $arrDados 						= $_REQUEST;
 $arrRetorno						= array(); 
 $arrRetorno["success"]			= false;
 $arrRetorno["erro"]["motivo"] 	= "Erro no usuario ou senha";
-$_SESSION["idUsuario"]			= ""; 
-$_SESSION["NmUsuario"]			= ""; 
+$_SESSION["id"]			= ""; 
+$_SESSION["nome"]			= ""; 
 
 if($arrDados["acao"]=="login")
 {
-	$strSQL = "SELECT idUsuario, NmUsuario FROM usuario WHERE 
-			   DsEmail = '" . mysql_real_escape_string($arrDados["email"]) . "' 
+	$strSQL = "SELECT id, nome FROM usuario WHERE 
+			   email = '" . mysql_real_escape_string($arrDados["email"]) . "' 
 			   AND 
-			   DsSenha = '" . mysql_real_escape_string($arrDados["senha"]) . "' 	
+			   senha = '" . mysql_real_escape_string($arrDados["senha"]) . "' 	
 			   ";    	
 	$objRow = mysql_fetch_array(mysql_query($strSQL));
 
-	if($objRow["idUsuario"]<>"")	
+	if($objRow["id"]<>"")	
 	{
 		$arrRetorno["success"] = true; 
-		$_SESSION["idUsuario"]			= $objRow["idUsuario"]; 
-		$_SESSION["NmUsuario"]			= $objRow["NmUsuario"]; 
+		$_SESSION["id"]			= $objRow["id"]; 
+		$_SESSION["nome"]			= $objRow["nome"]; 
 		unset($arrRetorno["erro"]);
-	}
+	}	
 }
 
 echo json_encode($arrRetorno); 

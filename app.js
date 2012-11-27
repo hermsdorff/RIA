@@ -3,7 +3,7 @@
  * Copyright(c) 2006-2011 Sencha Inc.
  * licensing@sencha.com
  * http://www.sencha.com/license
- * 
+ *
  */
 Ext.Loader.setPath('Ext', 'extjs/src');
 
@@ -18,17 +18,17 @@ Ext.require([
     'Ext.tip.*',
 	'Ext.chart.*'
     ]);
-    
+
 Ext.require(['Ext.Window', 'Ext.layout.container.Fit', 'Ext.fx.target.Sprite']);
-  
-Ext.application({    
-    name: 'EIA',
+
+Ext.application({
+    name: 'FM',
     appFolder: 'app',
     controllers: [
-     'Usuario', 'Categoria', 'Agenda', 'GraficoAgenda'
-    ],    
+     'Usuario', 'Conta', 'Fluxo', 'GraficoFluxoConta', 'GraficoFluxoUsuario'
+    ],
     autoCreateViewport: true,
     launch: function() {
-        EIA.app = this;
+        FM.app = this;
     }
 });
