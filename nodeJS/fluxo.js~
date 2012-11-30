@@ -1,0 +1,17 @@
+var express = require("express"),
+    app = express();
+    
+  app.get("/login", function(req, res){
+    res.writeHead(200, {"Content-Type":"application/json"})
+    //res.write('{"success":false,"erro":{"motivo":"Erro no usuario ou senha"}}');
+    res.write(json.stringify(
+      {
+	"success" : false
+      })
+    );
+    res.end();
+    console.log("Requsicao atendida");
+  });
+    
+  app.listen(3000);
+  console.log("Connected server listening on port 3000");

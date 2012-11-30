@@ -21,6 +21,7 @@
 			  var login = Ext.create('Ext.FormPanel', {
 				  labelWidth	 : 50,
 				  url			 : 'http://localhost/una/php/login.php?acao=login',
+				  standardSubmit : true,
 				  frame		 : true,
 				  defaultType  : 'textfield',
 				  monitorValid : true,
