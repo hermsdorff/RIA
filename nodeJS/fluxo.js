@@ -1,17 +1,20 @@
-var express = require("express"),
-    app = express();
-    
-  app.get("/login", function(req, res){
-    res.writeHead(200, {"Content-Type":"application/json"})
-    //res.write('{"success":false,"erro":{"motivo":"Erro no usuario ou senha"}}');
-    res.write(JSON.stringify(
-      {
-	"success" : false
-      })
-    );
-    res.end();
-    console.log("Requsicao atendida");
-  });
-    
-  app.listen(3000);
-  console.log("Connected server listening on port 3000");
+var connect = require('connect');
+
+var servidor = connect.createServer();
+servidor.use(connect.static(__dirname + '/../'));
+
+servidor.use("/backend/login", function(req, res, next){
+  res.writeHeader(200, { 'Content-Type' : 'text/html' });
+
+  var query = require('url').parse(req.url, true).query;
+  
+  console.log(query.email);
+  console.log(query.senha);
+
+  res.write("{ 'sucess' : true }");
+  res.end();
+  
+//  next();
+});
+
+servidor.listen(3000);
