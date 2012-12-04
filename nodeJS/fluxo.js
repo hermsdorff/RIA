@@ -1,17 +1,24 @@
 var connect = require('connect');
 
+
+var ConsultaSQL = function(query){
+  var Client = new require('mysql').Client;
+  var client = new Client();
+}
+
 var servidor = connect.createServer();
 servidor.use(connect.static(__dirname + '/../'));
-
 servidor.use("/backend/login", function(req, res, next){
   res.writeHeader(200, { 'Content-Type' : 'text/html' });
 
   var query = require('url').parse(req.url, true).query;
   
+  var consulta = new ConsultaSQL("teste");
+  
   console.log(query.email);
   console.log(query.senha);
 
-  res.write("{ 'sucess' : true }");
+  res.write('{ "success" : true }');
   res.end();
   
 //  next();

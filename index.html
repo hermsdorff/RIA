@@ -62,12 +62,12 @@
 				  if(login.getForm().isValid())
 				  {
 					  login.getForm().submit({
-						  method 		: 'GET',
+						  method 		: 'POST',
 						  waitTitle 	: 'Por favor, aguarde !!!',
 						  waitMsg 	: 'Autenticado no sistema ',
 						  success     : function(){
 									  login.getForm().reset();
-									  var redirect = 'principal.php';
+									  var redirect = 'principal.html';
 									  window.location = redirect;
 						  },
 						  failure     : function(form, action){
