@@ -1,29 +1,26 @@
 var connect = require('connect');
-
-
-var ConsultaSQL = function(query){
-  var Banco = new require('mysql').Client;
-  var banco = new Banco();
-  banco.user = "root";
-  banco.pass = "";
-}
+var login = require('./login.js');
+var banco = require('./banco.js');
 
 var servidor = connect.createServer();
 servidor.use(connect.static(__dirname + '/../'));
+
 servidor.use("/backend/login", function(req, res, next){
-  res.writeHeader(200, { 'Content-Type' : 'text/html' });
-
   var query = require('url').parse(req.url, true).query;
-  
-  var consulta = new ConsultaSQL("teste");
-  
-  console.log(query.email);
-  console.log(query.senha);
 
-  res.write('{ "success" : true }');
-  res.end();
+  res.writeHeader(200, { 'Content-Type' : 'application/json' });
+
+  login.login(query, banco, 
+    { 
+      sucesso : function(){
+	res.write('{ "success" : true }');
+      },
+      falha : function(erro){
+	res.write('{ "success" : false, "erro" : { "motivo" : ' + erro + '}}');
+      }
+    }
   
-//  next();
+  res.end(); 
 });
 
 servidor.listen(3000);
