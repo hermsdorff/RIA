@@ -178,7 +178,6 @@ servidor.use("/backend/conta/insert", function(req, res, next){
 });
 
 servidor.use("/backend/conta/delete", function(req, res, next){
-	console.log(req);
 	var query = require("url").parse(req.url, true).query;
 	var registros = JSON.parse(query.data);
 	console.log(registros);
