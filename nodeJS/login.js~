@@ -1,17 +1,29 @@
-modules.exports = {
-  login = function(query, banco, resposta){
-    var email = query.email;
-    var senha = query.senha;
-    
-    if(banco.login(email, senha)){
-      logado = true;
+var _logado = false;
+
+exports.login = function(query, repositorio, resposta){
+  var email = query.email;
+  var senha = query.senha;
+  
+  console.log(email);
+  console.log(senha);
+  
+  repositorio.login(email, senha, function(resultado){
+    if(resultado){
+      console.log("login com sucesso");
+      _logado = true;
       resposta.sucesso();
     } else {
-      logado = false;
-      resposta.fracasso("Não foi possível autenticar")
-  },
-  logout = function() {
-    logado = false;
-  },
-  logado = false;
+      console.log("login falhou");
+      _logado = false;
+      resposta.falha("Não foi possível autenticar");
+    }
+  });
+};
+  
+exports.logout = function() {
+  _logado = false;
+};
+
+exports.logado = function() {
+  return _logado;
 };

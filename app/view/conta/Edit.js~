@@ -13,22 +13,22 @@ Ext.define('FM.view.conta.Edit', {
         this.items = [{
             xtype: 'abstractform',
             items: [
-	      {
-                  xtype         : 'contaCombo',
-                  allowBlank    : true
+			        {
+                  xtype		: 'contaCombo',
+                  allowBlank: true
               },
-	      {
+			        {
                   name 		: 'nome',
                   fieldLabel	: 'Nome',
-          	  allowBlank	: false
+          				allowBlank	: false
               },
-	      {
+			        {
                   name 		: 'flag_tipo',
                   fieldLabel	: 'Tipo',
-                  xtype         : 'contaComboTipo',
-                  allowBlank	: false
+                  xtype       : 'contaComboTipo',
+                	allowBlank	: false
               }
-    	  ]}
+    			]}
         ];
         this.callParent(arguments);
     }

@@ -14,7 +14,7 @@ Ext.define('FM.store.Usuarios', {
 				destroy : 'php/usuarios.php?acao=delete'
 			},
 		actionMethods : {
-				create : 'GET',
+				create : 'POST',
 				read   : 'GET',
 				update : 'POST',
 				destroy: 'POST'

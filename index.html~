@@ -13,7 +13,7 @@
 
 			  var login = Ext.create('Ext.FormPanel', {
 				  labelWidth	 : 50,
-				  url			 : 'backend/login',
+				  url			 : 'http://localhost:3000/backend/login',
 				  frame		 : true,
 				  defaultType  : 'textfield',
 				  monitorValid : true,
@@ -62,7 +62,7 @@
 				  if(login.getForm().isValid())
 				  {
 					  login.getForm().submit({
-						  method 		: 'GET',
+						  method 		: 'POST',
 						  waitTitle 	: 'Por favor, aguarde !!!',
 						  waitMsg 	: 'Autenticado no sistema ',
 						  success     : function(){

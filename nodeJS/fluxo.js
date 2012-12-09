@@ -1,6 +1,7 @@
 var connect = require('connect');
 var login = require('./login.js');
-var banco = require('./banco.js');
+var banco = require('./infra/banco.js');
+var repUsuario = require('./repositorios/usuario.js');
 
 var servidor = connect.createServer();
 servidor.use(connect.static(__dirname + '/../'));
@@ -10,17 +11,98 @@ servidor.use("/backend/login", function(req, res, next){
 
   res.writeHeader(200, { 'Content-Type' : 'application/json' });
 
-  login.login(query, banco, 
+  login.login(query, repUsuario, 
     { 
       sucesso : function(){
+	console.log('{ "success" : true }');
 	res.write('{ "success" : true }');
+	res.end(); 
       },
       falha : function(erro){
-	res.write('{ "success" : false, "erro" : { "motivo" : ' + erro + '}}');
+	console.log('{ "success" : false, "erro" : { "motivo" : ' + erro + ' }}');
+	res.write('{ "success" : false, "erro" : { "motivo" : "' + erro + '" }}');
+	res.end();
       }
-    }
-  
-  res.end(); 
+    });
 });
 
-servidor.listen(3000);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+servidor.use("/backend/logout", function(req, res, next){
+  login.logout();
+  res.writeHeader(302, { 'Location' : '/index.html' });
+  res.end();
+});
+
+servidor.use("/backend/menu", function(req, res, next){
+  res.writeHeader(200, { 'Content-Type' : 'application/json' });
+  
+  var menu = {
+            children: [
+                    {
+                        text:'Clientes Cadastros',
+                        expanded: true,
+                        children:[
+                            {
+                                text:'Usuarios cadastrados',
+                                leaf: true,
+                                itemMenu: 'usuarioList'
+                            },
+                            {
+                                text:'Contas cadastradas',
+                                leaf: true,
+                                itemMenu: 'contaList'
+                            },
+                            {
+                                text:'Fluxos Cadastrados',
+                                leaf: true,
+                                itemMenu: 'fluxoList'
+                            },
+                        ]
+                    }
+                    ,
+                    {
+                        text:'Relatorios',
+                        expanded: true,
+                        children:[
+                            {
+                                text:'Grafico Fluxo de Caixa',
+                                leaf:true,
+                                itemMenu: 'graficoConta'
+                            }
+                        ]
+                    }
+                ]
+            }
+  
+  res.write(JSON.stringify(menu));
+  res.end();
+});
+
+servidor.use("/backend/logado", function(req, res, next){
+  res.writeHeader(200, { 'Content-Type' : 'application/json' });
+  
+  res.write("{ logado : " + login.logado() + " }");
+  
+  res.end();
+});
+
+servidor.use("/backend/user/list", function(req, res, next){
+  var query = require('url').parse(req.url, true).query;
+  
+  console.log(query);
+  var coluna = (query.sort != undefined)? query.sort : 1;
+  var direcao = (query.dir != undefined)? query.dir : 'ASC';
+  var limite = (query.limit != undefined)? ((query.limit != 'limit')? query.limit: 20) : 20;
+  var pagina = (query.page != undefined)? query.page: 1;
+  var inicio = (pagina - 1) * limite;
+  
+  repUsuario.list(coluna, direcao, limite, inicio, pagina, function(resultado){
+    res.writeHeader(200, { 'Content-Type' : 'application/json' });
+    res.write(JSON.stringify(resultado));
+    res.end();
+  });
+});
+
+servidor.listen(3000);
+
+require("./infra/string.js");
+console.log("Escutando porta {0}".format(3000));
