@@ -80,41 +80,7 @@ Ext.define('FM.controller.Conta', {
 					  var store = this.getContaList().store;
 					  store.remove(records);
 					  store.sync();
-					  
-			/*            // array para armazenar o(s) id(s) dos registros a serem excluídos
-			            var idSel = [];
-
-			            // atribui o(s) id(s) dos registros selecionados ao array de id(s) dos registros a serem excluídos
-			            for( var i = 0 ; i < records.length ; i++ )
-			            {
-				            idSel.push(records[i].data.id);
-			            }
-
-			            // faz a requisição da exclusão
-			            Ext.Ajax.request ({
-				            scope	: this,
-				            url		: 'backend/conta/delete', //arquivo que contém o método a utilizar
-				            params	: {
-							            'id[]'	: idSel //manda o array idSel para o método excluir o registro
-						              },
-				            success: function(r){ // se a exclusão foi executada com sucesso
-					            //Se tudo OK, pegamos a resposta que é um JSON e decodificamos para um objeto
-					            var obj = Ext.decode(r.responseText);
-					            //Verificamos se obtivemos sucesso na ação
-					            if(obj.success){
-						            Ext.Msg.alert('Sucesso', obj.message);
-						            this.getContaList().store.loadPage(1);
-                	            //this.getAgendaList().store.load(); // atualiza informações dogrid
-					            }
-					            else{
-						            Ext.Msg.alert('Erro', obj.message); //exibe a mensagem
-					            }
-				            },
-				            failure: function(){ // se houve algum erro ao submeter o formulário
-					            Ext.Msg.alert('Erro', 'Erro na comunicação com o servidor.'); //exibe a mensagem
-				            }
-			            });
-                    */}
+			}
                 }
             });
         }
