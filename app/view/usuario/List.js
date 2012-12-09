@@ -46,20 +46,16 @@ Ext.define('FM.view.usuario.List' ,{
         dock		: 'bottom',
         displayInfo	: true
     }],
-
     initComponent: function(){
         this.callParent();
         this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
     },
-
     onRender: function(){
         this.store.load();
         this.callParent(arguments);
     },
-
     onSelectChange: function(selModel, selections){
         this.down('#delete').setDisabled(selections.length === 0);
         this.down('#edit').setDisabled(selections.length !== 1);
     }
-
 });

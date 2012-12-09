@@ -75,7 +75,7 @@ Ext.define('FM.view.Viewport', {
                 url: 'backend/menu',
                 noCache : false,
                 actionMethods: {
-                    read: 'POST'
+                    read: 'GET'
                 }
             }
         })

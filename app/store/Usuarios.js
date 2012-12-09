@@ -10,14 +10,14 @@ Ext.define('FM.store.Usuarios', {
 			api            : {
 				read    : 'backend/user/list',
 				create  : 'backend/user/insert',
-				update  : 'php/usuarios.php?acao=update',
-				destroy : 'php/usuarios.php?acao=delete'
+				update  : 'backend/user/update',
+				destroy : 'backend/user/delete'
 			},
 		actionMethods : {
 				create : 'GET',
 				read   : 'GET',
-				update : 'POST',
-				destroy: 'POST'
+				update : 'GET',
+				destroy: 'GET'
 		},
 		reader : {
 			type 			: 'json',

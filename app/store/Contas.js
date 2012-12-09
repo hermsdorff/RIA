@@ -8,16 +8,16 @@ Ext.define('FM.store.Contas', {
         simpleSortMode: true,
         type: 'ajax',
 			api            : {
-				read    : 'php/contas.php?acao=list',
-				create  : 'php/contas.php?acao=insert',
-				update  : 'php/contas.php?acao=update',
-				destroy : 'php/contas.php?acao=delete'
+				read    : 'backend/conta/list',
+				create  : 'backend/conta/insert',
+				update  : 'backend/conta/update',
+				destroy : 'backend/conta/delete'
 			},
 		actionMethods : {
-				read	: 'POST',
-				create	: 'POST',
-				update	: 'POST',
-				destroy : 'POST'
+				read	: 'GET',
+				create	: 'GET',
+				update	: 'GET',
+				destroy : 'GET'
 		},
         reader: {
 				type		: 'json',
