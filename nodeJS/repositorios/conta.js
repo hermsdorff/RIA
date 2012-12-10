@@ -6,10 +6,8 @@ exports.list = function(coluna, direcao, limite, inicio, pagina, callback){
 	var strSQL = "SELECT id, conta_id, nome, flag_tipo FROM conta" + 
 		" ORDER BY " + coluna + " " + direcao +
 		" LIMIT " + limite * (pagina - 1) + "," + limite;
-	console.log("lista conta: " + strSQL);
 
 	banco.consultaBanco(strSQL, function(err, info){
-		console.log(err);
 
 		var strQt = "SELECT COUNT(*) AS total FROM conta";
 		
@@ -39,5 +37,23 @@ exports.remove = function(registro, callback){
 	var strSQL = "DELETE FROM conta WHERE id = {0}".format(registro.id);
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(err == null);
+	});
+}
+
+exports.graficoTrans = function(callback){
+	var strSQL = 	"SELECT COUNT(f.id) as total, c.nome as conta " + 
+			"FROM conta c INNER JOIN fluxo f ON f.conta_id = c.id " +
+			"GROUP BY c.nome ORDER BY c.nome desc";
+	banco.consultaBanco(strSQL, function(err, info){
+		callback(info);
+	});
+}
+
+exports.graficoVolume = function(callback){
+	var strSQL = 	"SELECT SUM(f.valor) as total, c.nome as conta " + 
+			"FROM conta c INNER JOIN fluxo f ON f.conta_id = c.id " +
+			"GROUP BY c.nome ORDER BY c.nome desc";
+	banco.consultaBanco(strSQL, function(err, info){
+		callback(info);
 	});
 }

@@ -35,7 +35,6 @@ exports.list = function(coluna, direcao, limite, inicio, pagina, callback){
 	var strSQL = "SELECT id, nome, email, senha FROM usuario" + 
 		" ORDER BY " + coluna + " " + direcao +
 		" LIMIT " + limite * (pagina - 1) + "," + limite;
-	console.log("lista usuario: " + strSQL);
 
 	banco.consultaBanco(strSQL, function(err, info){
 		console.log(err);

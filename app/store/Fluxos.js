@@ -8,16 +8,16 @@ Ext.define('FM.store.Fluxos', {
             simpleSortMode : true,
             type           : 'ajax',
             api            : {
-                read    : 'php/fluxos.php?acao=list',
-                create  : 'php/fluxos.php?acao=insert',
-                update  : 'php/fluxos.php?acao=update',
-                destroy : 'php/fluxos.php?acao=delete'
+                read    : 'backend/fluxo/list',
+                create  : 'backend/fluxo/insert',
+                update  : 'backend/fluxo/update',
+                destroy : 'backend/fluxo/delete'
             },
         actionMethods : {
-                create : 'POST',
-                read   : 'POST',
-                update : 'POST',
-                destroy: 'POST'
+                create : 'GET',
+                read   : 'GET',
+                update : 'GET',
+                destroy: 'GET'
         },
         reader : {
             type            : 'json',

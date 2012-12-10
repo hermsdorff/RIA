@@ -1,13 +1,13 @@
-Ext.define('FM.view.conta.graficoConta' ,{
+Ext.define('FM.view.conta.graficoVolume' ,{
     extend	: 'Ext.chart.Chart',
-    alias 	: 'widget.graficoConta',
+    alias 	: 'widget.graficoVolume',
     style	: 'background:#fff',
     animate	: true,
 	theme	: 'Green',
 	//'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow'
 	//'Category1' ate 'Category6'.
     shadow	: true,
-    store	: 'GraficoFluxoContas',
+    store	: 'GraficoVolumeContas',
 	//legend	: false,
 	legend	: { position: 'right'},
     axes: [{
@@ -17,7 +17,7 @@ Ext.define('FM.view.conta.graficoConta' ,{
         label	: {
             renderer: Ext.util.Format.numberRenderer('0,0')
         },
-        title	: 'Fluxo de Contas',
+        title	: 'Volume de Contas',
         grid	: false,
         minimum	: 0
     },
@@ -38,7 +38,7 @@ Ext.define('FM.view.conta.graficoConta' ,{
             width	: 300,
             height	: 30,
             renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('total') + ' transacoes na conta ' + storeItem.get('conta') );
+                this.setTitle('$' + storeItem.get('total') + ' na conta ' + storeItem.get('conta') );
             }
         },
         label: {

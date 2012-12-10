@@ -25,7 +25,7 @@ Ext.application({
     name: 'FM',
     appFolder: 'app',
     controllers: [
-     'Usuario', 'Conta', 'Fluxo', 'GraficoFluxoConta', 'GraficoFluxoUsuario'
+     'Usuario', 'Conta', 'Fluxo', 'GraficoFluxoConta', 'GraficoVolumeConta'
     ],
     autoCreateViewport: true,
     launch: function() {

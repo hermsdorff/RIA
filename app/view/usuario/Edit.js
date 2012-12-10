@@ -17,9 +17,9 @@ Ext.define('FM.view.usuario.Edit', {
                 combineErrors	: false,
                 msgTarget		: 'side'
             },
-            defaultType			: 'textfield',
-            defaults			: {
-							anchor: '100%'
+		defaultType			: 'textfield',
+		defaults			: {
+		anchor: '100%'
             },
             items	: [
 			{
