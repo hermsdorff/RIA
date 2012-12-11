@@ -3,12 +3,12 @@ var banco = require('../infra/banco.js');
 	require("../infra/string.js");
 	
 exports.list = function(coluna, direcao, limite, inicio, pagina, callback){
-	var strSQL = "SELECT idFluxo as id, teContas_idContas as conta_id, DsDescricao as descricao, DATE_FORMAT(DtFluxo, '%Y-%m-%d') as dt_fluxo, NuValor as valor FROM teFluxo" + 
+	var strSQL = "SELECT idFluxo as id, teContas_idContas as conta_id, DsDescricao as descricao, DATE_FORMAT(DtFluxo, '%Y-%m-%d') as dt_fluxo, NuValor as valor FROM fluxo" + 
 		" ORDER BY " + coluna + " " + direcao +
 		" LIMIT " + limite * (pagina - 1) + "," + limite;
 
 	banco.consultaBanco(strSQL, function(err, info){
-		var strQt = "SELECT COUNT(*) AS total FROM teFluxo";
+		var strQt = "SELECT COUNT(*) AS total FROM fluxo";
 		
 		banco.consultaBanco(strQt, function(qt_err, qt_info){
 			var resultado = { data : info, success : true, inicio : limite * (pagina - 1), total : qt_info[0].total };
@@ -18,21 +18,21 @@ exports.list = function(coluna, direcao, limite, inicio, pagina, callback){
 };
 
 exports.insert = function(registro, callback){
-	var strSQL = "INSERT INTO teFluxo (teContas_idContas, DsDescricao, DtFluxo, NuValor) VALUES ('{0}','{1}','{2}','{3}')".format(registro.conta_id, registro.descricao, registro.dt_fluxo, registro.valor);
+	var strSQL = "INSERT INTO fluxo (teContas_idContas, DsDescricao, DtFluxo, NuValor) VALUES ('{0}','{1}','{2}','{3}')".format(registro.conta_id, registro.descricao, registro.dt_fluxo, registro.valor);
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(err == null);
 	});
 }
 
 exports.update = function(registro, callback){
-	var strSQL = "UPDATE teFluxo SET teContas_idContas = '{0}', DsDescricao = '{1}', DtFluxo = '{2}', NuValor = '{3}' WHERE idFluxo = {4}".format(registro.conta_id, registro.descricao, registro.dt_fluxo, registro.valor, registro.id);
+	var strSQL = "UPDATE fluxo SET teContas_idContas = '{0}', DsDescricao = '{1}', DtFluxo = '{2}', NuValor = '{3}' WHERE idFluxo = {4}".format(registro.conta_id, registro.descricao, registro.dt_fluxo, registro.valor, registro.id);
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(err == null);
 	});
 }
 
 exports.remove = function(registro, callback){
-	var strSQL = "DELETE FROM teFluxo WHERE idFluxo = {0}".format(registro.id);
+	var strSQL = "DELETE FROM fluxo WHERE idFluxo = {0}".format(registro.id);
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(err == null);
 	});

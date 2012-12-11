@@ -42,7 +42,7 @@ exports.remove = function(registro, callback){
 
 exports.graficoTrans = function(callback){
 	var strSQL = 	"SELECT COUNT(f.idFluxo) as total, c.NmConta as conta " + 
-			"FROM teContas c INNER JOIN teFluxo f ON f.teContas_idContas = c.idContas " +
+			"FROM teContas c INNER JOIN fluxo f ON f.teContas_idContas = c.idContas " +
 			"GROUP BY c.NmConta ORDER BY c.NmConta desc";
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(info);
@@ -51,7 +51,7 @@ exports.graficoTrans = function(callback){
 
 exports.graficoVolume = function(callback){
 	var strSQL = 	"SELECT SUM(f.NuValor) as total, c.NmConta as conta " + 
-			"FROM teContas c INNER JOIN teFluxo f ON f.teContas_idContas = c.idContas " +
+			"FROM teContas c INNER JOIN fluxo f ON f.teContas_idContas = c.idContas " +
 			"GROUP BY c.NmConta ORDER BY c.NmConta desc";
 	banco.consultaBanco(strSQL, function(err, info){
 		callback(info);
